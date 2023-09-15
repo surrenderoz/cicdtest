@@ -1,0 +1,21 @@
+name: deploy
+
+on: 
+  push:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Deploy CiCD
+      run: |
+        sudo apt install sshpass
+        echo "installed sshpass"
+        sshpass -p 1234 ssh oz@172.16.219.130
+        cd
+        
+        git clone https://github.com/surrenderoz/cicdtest.git
+        yarn install
+        yarn run dev
+    
